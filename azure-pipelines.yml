@@ -11,10 +11,19 @@ pr: none
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo variables['Build.Reason']
-    echo $(Build.Reason)
+stages:
+- stage: deploy
+  jobs:
+  - deployment: DeployWeb
+    displayName: deploy Web App
+    # pool:
+    #   vmImage: 'Ubuntu-latest'
+    # creates an environment if it doesn't exist
+    environment: a.win002
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - script: echo Hello world
+          - script: echo $(USE_LATEST_GIT_VERSION)
