@@ -25,5 +25,5 @@ stages:
         deploy:
           steps:
           - checkout: self
-          - script: echo Hello world
+          - script: echo Hello worldr
           - script: echo $(USE_LATEST_GIT_VERSION)
